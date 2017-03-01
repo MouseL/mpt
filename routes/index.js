@@ -3,7 +3,7 @@ var router = express.Router();
 var uuid = require('node-uuid');
 
 // var ctx = 'https://mpt.onetwoer.com/';
-var ctx = 'http://192.168.43.115:18081';
+var ctx = 'http://127.0.0.1:18081';
 
 /* GET home page. */
 
