@@ -1,0 +1,185 @@
+$popup: "xy-" !default;
+
+
+.#{$popup}mask
+{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 99;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    &.transparent
+    {
+        background-color: rgba(255, 255, 255, 0);        
+    }
+}
+
+.#{$popup}toast
+{
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    z-index: 999;
+    padding: 1.8em 1em 0em 1em;
+    min-width: 7.6em;
+    min-height: 7.6em;
+    background: rgba(40, 40, 40, 0.75);
+    text-align: center;
+    
+    @include border-radius(5px);
+    @include transform(translate(-50%, -50%)!important);
+
+
+    i.icon
+    {
+        @include icon-success;
+        
+        display: block;
+        min-height: 32px;
+        color: #fff;
+        font-size: 42px;
+    }
+    p.text
+    {
+        padding-top: 0.8em;
+        color: #fff;
+    }
+
+
+    &.xy-success
+    {
+        
+    }   
+    &.xy-error
+    {
+        i.icon
+        {
+            @include icon-error;
+
+            font-size: 42px;
+        }
+        p.text
+        {
+
+        }
+    }
+    &.xy-loading
+    {
+        i.icon
+        {
+            @include icon-loading;
+
+            font-size: 32px;
+
+            &:before
+            {
+                display: inline-block;
+                // animation: loading 2.5s infinite ;
+                @include animation(spinner 3s infinite);
+            }
+        }
+        p.text
+        {
+
+        }
+    }
+
+}
+
+.#{$popup}dialog
+{
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    z-index: 999;
+    width: 80%;
+    min-height: 7.6em;
+    background-color: #fff;
+
+    @include border-radius(4px);
+    @include transform(translate(-50%, -50%)!important);
+
+    .dialog-hd
+    {
+        padding: 0.8em 0.8em 0.2em 0.8em;
+        font-size: 16px;
+        color: #222;
+    }
+
+    .dialog-bd
+    {
+        padding: 0.5em 1em 1em 1em;
+        font-size: 13px;
+        line-height: 1.5em;
+        color: #888;
+    }
+    .dialog-ft
+    {
+        position: relative;
+        
+        @include mini-border(top, #888);
+
+        .action
+        {
+            display: table;
+            width: 100%;
+
+            li
+            {
+                position: relative;
+                height: 40px;
+                display: table-cell;
+
+                @include mini-border(left, #888);
+
+                .mui-btn
+                {
+                    display: block;
+                    padding: 0px;
+                    height: 40px;
+                    line-height: 40px;
+                    font-size: 14px;
+                    text-align: center;
+                    border: none;
+                    color: #666;
+                    background-color: transparent;
+
+                    @include border-radius(0px 0px 4px 0px);
+                }
+                .mui-btn-success
+                {
+                    color: #4cd964;
+                }
+            }
+            li:first-child
+            {
+                &:before
+                {
+                    content: none;
+                }
+                .mui-btn
+                {
+                    @include border-radius(0px 0px 0px 4px);
+                }
+            }
+        }
+        
+    }
+}
+
+
+@include keyframes(spinner)
+{
+    0% 
+    {
+        @include transform(rotate(0deg));
+    }
+
+    100% 
+    {
+        @include transform(rotate(360deg));
+    }
+}

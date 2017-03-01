@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" class="choose">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="misapplication-tap-highlight" content="no"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="MobileOptimized" content="320"/>
+    <link rel="stylesheet" href="/css/global.css?@@vv">
+</head>
+<body>  
+
+
+    <div id="check-guid" class="page out page-check-guid" data-title="正在验证...">
+        <div class="content">
+            <p class="message fixed-center">
+                <span>
+                    <i class="icon"></i>
+                    正在验证二维码...
+                </span>
+            </p>
+        </div>
+    </div>
+
+
+    <div id="choose" class="page page-choose out" data-title="请选择文件">
+        <div class="content">
+            <p class="message fixed-center">
+                <span>
+                    <i class="icon"></i>
+                    请点击选择图片按钮(最多9张)
+                </span>
+            </p>
+            <ul class="file-list">
+                
+            </ul>
+        </div>
+        <div class="action">
+            <a href="javascript:;" class="button button-choose">
+                选择图片<input type="file" accept="image/*" multiple>
+            </a>
+
+            <a href="javascript:;" class="button button-upload">
+                上传图片
+            </a>
+        </div>
+    </div>
+
+    <div id="completed" class="page page-completed out" data-title="上传图片完成">
+        <div class="content">
+            <p class="message fixed-center">
+                <span>
+                    <i class="icon"></i>
+                    上传图片完成
+                </span>
+            </p>
+        </div>
+    </div>
+
+
+    <div id="t" class="page page-t out">
+        <a href="#choose" class="go-choose"></a>
+        <a href="#completed" class="go-completed"></a>
+    </div>
+
+</body>
+
+<script src="/js/require-config.js?@@vv"></script>
+<script src="/js/require.js?@@vv"></script>
+<script>
+    var ctx = '<%-ctx%>';
+    var guid = '<%-guid%>';
+    require(['global'], function(){});
+</script>
+</html>

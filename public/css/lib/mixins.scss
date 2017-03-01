@@ -1,0 +1,94 @@
+@function compact($args...) 
+{
+    $ret: ();
+    @each $i in $args{
+        @if($i){//if 不会过滤0
+            $ret: append($ret, $i, comma);
+        }
+    }
+    @return $ret;
+}
+
+
+// 实心箭头
+@mixin sincere-arrow($direction: down, $border-width: 5px, $border-color:#0e90d2)
+{
+    &:before
+    {
+        content: '';
+        width: 0px;
+        height: 0px;
+        border-width: $border-width;
+        border-style: solid;
+        border-color: transparent;
+        overflow: hidden;
+
+        @if $direction == down
+        {
+            border-top-color: $border-color;
+        }
+        @else if  $direction == up
+        {
+            border-bottom-color: $border-color;   
+        }
+        @else if  $direction == left
+        {
+            border-right-color: $border-color;   
+        }
+        @else if  $direction == right
+        {
+            border-left-color: $border-color;   
+        }
+    }
+}
+
+
+@mixin mini-border($direction: top,  $color: #888, $pseudo: before)
+{
+    &:#{$pseudo}
+    {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        height: 1px;
+        width: 100%;
+        
+        @if $direction == top
+        {
+            top: 0px;
+            left: 0px;
+            border-top: solid 1px $color;
+            @include transform(scaleY(0.5));
+        }
+
+        @if $direction == bottom
+        {
+            bottom: 0px;
+            left: 0px;
+            border-top: solid 1px $color;
+            @include transform(scaleY(0.5));
+        }
+
+        @if $direction == left
+        {
+            top: 0px;
+            left: 0px;
+            height: 100%;
+            width: 1px;
+            border-left: solid 1px $color;
+            @include transform(scaleX(0.5));
+        }
+
+        @if $direction == right
+        {
+            top: 0px;
+            right: 0px;
+            height: 100%;
+            width: 1px;
+            border-left: solid 1px $color;
+            @include transform(scaleX(0.5));
+        }
+    }
+}
+
+

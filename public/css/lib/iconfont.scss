@@ -1,0 +1,81 @@
+
+@font-face {
+    font-family: iconfont;
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/iconfont.ttf");
+}
+
+@mixin iconfont 
+{
+    font-family:"iconfont" !important;
+    font-size:18px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.iconfont
+{
+    @include iconfont();
+}
+
+
+.icon-success:before { content: "\e600"; }
+.icon-dept:before { content: "\e603"; }
+.icon-people:before { content: "\e604"; }
+.icon-no-data:before { content: "\e605"; }
+.icon-error:before { content: "\e601"; }
+.icon-loading:before { content: "\e602"; }
+
+
+
+@mixin icon-success 
+{ 
+    @include iconfont;
+    &:before
+    {
+        content: "\e600"; 
+    }
+}
+@mixin icon-error 
+{ 
+    @include iconfont;
+    &:before
+    {
+        content: "\e601"; 
+    }
+}
+@mixin icon-loading 
+{ 
+    @include iconfont;
+    &:before
+    {
+        content: "\e602"; 
+    }
+}
+@mixin icon-people 
+{ 
+    @include iconfont;
+    &:before
+    {
+        content: "\e604"; 
+    }
+}
+@mixin icon-dept 
+{ 
+    @include iconfont;
+    &:before
+    {
+        content: "\e603"; 
+    }
+}
+@mixin icon-no-data 
+{ 
+    @include iconfont;
+    &:before
+    {
+        content: "\e605"; 
+    }
+}

@@ -1,0 +1,660 @@
+@import "components/compass-mixins/lib/compass";
+@import "components/compass-mixins/lib/animation/core";
+
+@import "lib/mixins";
+@import "lib/iconfont";
+
+@import "components/mobilebone/mobilebone";
+@import "components/mobilebone/mobilebone.animate";
+
+@import "components/popup";
+
+@import "lib/base";
+
+
+
+$bg-url: '../images/bg/';
+
+
+html
+{
+    font-size: 14px;
+}
+
+html.qrcode
+{
+    min-height: 500px;
+    body
+    {
+        margin: 0px auto;
+        max-width: 640px;
+    }
+}
+
+.page
+{
+    .content
+    {
+        position: relative;
+        margin: 0px auto;
+        width: 100%;
+        height: 100%;
+        // max-width: 640px;
+        overflow: auto;
+
+        .message
+        {
+            position: relative;
+            line-height: 20px;
+            text-align: center;
+            color: #333;
+
+
+            span
+            {
+                position: relative;
+                padding-left: 26px;
+                display: inline-block;
+                .icon
+                {
+                    position: absolute;
+                    left: 0px;
+                    top: 50%;
+                    width: 20px;
+                    height: 20px;
+
+                    font-size: 20px;
+
+                    @include transform(translate(0%, -50%));
+                }
+            }
+        }
+    }
+
+    .fixed-center
+    {
+        position: absolute;
+        top: 40%;
+        left: 0%;
+        width: 100%;
+        height: auto;
+
+        @include transform(translate(0%, -50%));
+    }
+}
+
+
+.page-socket-connection,
+.page-receive-file
+{
+    .message
+    {
+        
+        span
+        {
+            .icon
+            {
+                @include icon-loading;
+
+                &:before
+                {
+                    display: inline-block;
+                    // animation: loading 2.5s infinite ;
+                    @include animation(spinner 3s infinite);
+                }
+            }
+        }
+
+    }
+}
+
+.page-qrcode
+{
+    .qrcode-container
+    {
+        margin: 0px auto;
+        text-align: center;
+    }
+
+    .message
+    {
+        span
+        {
+            padding-left: 0px!important;
+        }
+    }
+}
+
+
+.page-receive-file
+{
+    padding: 0px 0px 50px 0px;
+
+    .file-list
+    {
+        display: none;
+        padding: 3px 5px;
+        margin: 0px auto;
+        max-width: 640px;
+
+        height: 370px;
+
+        @include clearfix;
+
+        li
+        {
+            position: relative;
+            float: left;
+            margin-top: 2px;
+            padding: 2px;
+            width: 33%;
+            height: 120px;
+
+            div
+            {
+                position: relative;
+                height: 100%;
+                border: solid 1px #ccc;
+
+                @include transition(all, 0.3s);
+
+                &:hover
+                {
+                    cursor: pointer;
+                    border: solid 1px #5cb85c;
+                }
+                img
+                {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+
+                    max-height: 95%;
+                    max-width: 95%;
+
+                    @include transform(translate(-50%, -50%));
+                }
+            }
+        }
+
+        li:nth-of-type(3n+2)
+        {
+            width: 34%;
+        }
+    }
+
+    .status
+    {
+        display: none;
+
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        margin: 0px;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        line-height: 20px;
+        text-align: center;
+        color: #333;
+
+
+        span
+        {
+            position: relative;
+            padding-left: 26px;
+            display: inline-block;
+            text-align: left;
+            .icon
+            {
+                position: absolute;
+                left: 0px;
+                top: 50%;
+                width: 20px;
+                height: 20px;
+
+                font-size: 20px;
+
+                @include transform(translate(0%, -50%));
+
+                @include icon-loading;
+
+                &:before
+                {
+                    display: inline-block;
+                    // animation: loading 2.5s infinite ;
+                    @include animation(spinner 3s infinite);
+                }
+            }
+
+            .index,.count
+            {
+                display: inline-block;
+                vertical-align: middle;
+                margin: 0px 1px;
+                color: #222;
+            }
+        }
+
+
+        .button-restart
+        {
+            display: none;
+
+            position: relative;
+            margin: 0px auto;
+            margin-top: 10px;
+            width: 80%;
+            height: 36px;
+            line-height: 36px;
+            font-size: 14px;
+            text-align: center;
+
+            color: #fff;
+            border: solid 1px #d43f3a;
+            background-color: #d9534f;
+            text-decoration: none;
+
+            @include border-radius(4px);
+
+            @include transition(all, 0.4s);
+
+        
+            &:active,
+            &:focus,
+            &:focus
+            {
+                background-color: #ac2925;
+                border-color: #761c19;
+            }
+        }
+
+    }
+
+    &.has-file
+    {        
+        .file-list
+        {
+            display: block;
+        }
+        .message
+        {
+            display: none;
+        }
+        .status
+        {
+            display: block;
+        }
+    }
+
+    &.completed
+    {
+        padding: 0px 0px 100px 0px;
+
+        .status
+        {
+            height: 90px;
+            span
+            {
+                color: #5cb85c;
+                .icon
+                {
+                    position: absolute;
+                    left: 0px;
+                    top: 50%;
+                    width: 20px;
+                    height: 20px;
+
+                    @include transform(translate(0%, -50%));
+
+                    @include icon-success();
+
+                    &:before
+                    {
+                        @include animation(none);
+                    }
+                }
+            }
+
+
+            .button-restart
+            {
+                display: block;
+            }
+            
+        }
+        
+    }
+}
+
+.page-check-guid
+{
+    .message
+    {
+        span
+        {
+            font-size: 18px;
+            .icon
+            {
+                @include icon-loading;
+
+                &:before
+                {
+                    display: inline-block;
+                    // animation: loading 2.5s infinite ;
+                    @include animation(spinner 3s infinite);
+                }
+            }
+        }
+    }
+
+    &.error
+    {
+        .content
+        {
+            .message
+            {
+                span
+                {
+                    color: #f00;
+                    .icon
+                    {
+                        @include icon-error;
+
+                        &:before
+                        {
+                            display: inline-block;
+                            // animation: loading 2.5s infinite ;
+                            @include animation(none);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.page-choose
+{
+    padding: 0px 0px 100px 0px;
+
+    .content
+    {
+
+        .message
+        {
+            text-align: center;
+            color: #333;
+        }
+
+        .file-list
+        {
+            display: none;
+            padding: 3px 5px;
+            margin: 0px auto;
+            max-width: 640px;
+
+            height: 370px;
+
+            @include clearfix;
+
+            li
+            {
+                position: relative;
+                float: left;
+                margin-top: 2px;
+                padding: 2px;
+                width: 33%;
+                height: 120px;
+
+                div
+                {
+                    position: relative;
+                    height: 100%;
+                    border: solid 1px #ccc;
+                    img
+                    {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+
+                        max-height: 95%;
+                        max-width: 95%;
+
+                        @include transform(translate(-50%, -50%));
+                    }
+                }
+            }
+
+            li:nth-of-type(3n+2)
+            {
+                width: 34%;
+            }
+        }
+    }
+
+    .action
+    {
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 90px;
+        background-color: #fff;
+
+        a
+        {
+            position: relative;
+            display: block;
+            margin: 0px auto;
+            width: 90%;
+            height: 36px;
+            line-height: 36px;
+            color: #333;
+            font-size: 14px;
+            text-align: center;
+
+            background-color: #fff;
+            border: solid 1px #ccc;
+            text-decoration: none;
+
+            @include border-radius(4px);
+
+            @include transition(all, 0.4s);
+
+            &:active,
+            &:focus,
+            &:focus
+            {
+                background-color: #e6e6e6;
+                border-color: #adadad;
+            }
+
+
+            input[type="file"]
+            {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        }
+
+        .button-choose
+        {   
+            &.disabled
+            {
+                opacity: 0.6;
+                background-color: #e6e6e6;
+                border-color: #adadad;
+
+                input[type="file"]
+                {
+                    top: -100px;
+                }
+            }
+        }
+
+        .button-upload
+        {
+            margin-top: 10px;
+            
+            color: #fff;
+            border: solid 1px #4cae4c;
+            background-color: #5cb85c;
+
+
+            &:active,
+            &:focus,
+            &:focus
+            {
+                background-color: #398439;
+                border-color: #255625;
+            }
+        }
+    }
+
+    &.has-file
+    {
+        .content
+        {
+            .message
+            {
+                display: none;
+            }
+
+            .file-list
+            {
+                display: block;
+            }
+        }
+    }
+
+    &.no-file
+    {
+        .content
+        {
+            .message
+            {
+                display: block;
+                color: #f00;
+                .icon
+                {
+                    @include icon-error;
+
+                    vertical-align: 2px;
+
+                    &:before
+                    {
+                        display: inline-block;
+                        // animation: loading 2.5s infinite ;
+                        @include animation(none);
+                        color: #f00;
+                    }
+                }
+            }
+
+            .file-list
+            {
+                display: none;
+            }
+        }
+    }
+
+    &.compress-file
+    {
+        .message
+        {
+            
+            span
+            {
+                .icon
+                {
+                    @include icon-loading;
+
+                    &:before
+                    {
+                        display: inline-block;
+                        // animation: loading 2.5s infinite ;
+                        @include animation(spinner 3s infinite);
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+
+.page-completed
+{
+    .content
+    {
+        .message
+        {
+            text-align: center;
+
+            span
+            {
+                font-size: 18px;
+                color: #5cb85c;
+                .icon
+                {
+
+                    @include icon-success();
+                    &:before
+                    {
+                        font-size: 24px;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+
+
+
+html.support,
+html.privacy
+{
+    color: #222;
+    .wrap
+    {
+        padding: 20px 0px;
+        margin: 0px auto;
+        width: 1000px;
+
+
+        h1
+        {
+            padding: 10px 0px;
+            font-size: 18px;
+            font-weight: none;
+        }
+
+        p
+        {
+            line-height: 22px;
+            font-size: 13px;
+            color: #444;
+
+            a
+            {
+                color: #2f6f9f;
+                text-decoration: none;
+                &:hover
+                {
+                    color: #2f6f9f;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
